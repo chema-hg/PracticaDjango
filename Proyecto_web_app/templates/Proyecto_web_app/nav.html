@@ -1,0 +1,32 @@
+<ul class="nav justify-content-center my-2">
+
+    <li class="nav-item px-lg-4">
+        {% url 'Proyecto_web_app:home' as home_url %}
+        <a class="nav-link text-uppercase fw-bold text-expanded {% if request.path == home_url %}
+        text-black{% endif %}" href="{{ home_url }}">Inicio</a>
+    </li>
+
+    <li class="nav-item px-lg-4">
+        {% url 'Proyecto_web_app:servicios' as servicios_url %}
+        <a class="nav-link text-uppercase fw-bold text-expanded {% if request.path == servicios_url %}
+        text-black{% endif %}" href="{{ servicios_url }}">Servicios</a>
+    </li>
+
+    <li class="nav-item px-lg-4">
+        {% url 'Proyecto_web_app:blog' as blog_url %}
+        <a class="nav-link text-uppercase fw-bold text-expanded {% if request.path == blog_url %}
+        text-black{% endif %}" href="{{ blog_url }}">Blog</a>
+    </li>
+
+    <li class="nav-item px-lg-4">
+        {% url 'Proyecto_web_app:tienda' as tienda_url %}
+        <a class="nav-link text-uppercase fw-bold text-expanded {% if request.path == tienda_url %}
+        text-black{% endif %}" href="{{ tienda_url }}">Tienda</a>
+    </li>
+
+    <li class="nav-item px-lg-4">
+        {% url 'Proyecto_web_app:contacto' as contacto_url %}
+        <a class="nav-link text-uppercase fw-bold text-expanded {% if request.path == contacto_url %}
+        text-black{% endif %}" href="{{ contacto_url }}">Contacto</a>
+    </li>
+</ul>

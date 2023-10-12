@@ -1,0 +1,13 @@
+h1 { 
+    font-weight:normal;
+    border-bottom:1px solid #bbb;
+    padding:0 0 10px 0;
+}
+
+.fondo {
+    background-image: url(../img/bg_main.jpg);
+    height: 58vh;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}

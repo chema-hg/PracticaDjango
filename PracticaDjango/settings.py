@@ -33,6 +33,8 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     # Nuestras aplicaciones
     'Proyecto_web_app.apps.ProyectoWebAppConfig',
+    # Aplicaciones de terceros
+    'django_bootstrap5',
     # Aplicaciones por defecto
     'django.contrib.admin',
     'django.contrib.auth',
@@ -106,9 +108,9 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'es-es'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Europe/Madrid'
 
 USE_I18N = True
 

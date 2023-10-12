@@ -1,0 +1,48 @@
+{% load django_bootstrap5 %}
+{% load static %}
+{# para poder carga las etiqueta django_bootstrap5 y static posteriormente #}
+{# primero bootstrap y nuestro css #}
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title%}{% endblock %}</title>
+
+    <!-- Add Bootstrap CSS -->
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
+    {% bootstrap_messages %}
+
+    <!-- Nuestro CSS -->
+    <link rel="stylesheet" href="{% static 'Proyecto_web_app/css/style.css' %}">
+
+
+
+</head>
+
+<body>
+    <header>
+        <h1 class="container-fluid text-center text-white bg-dark py-5">UnikGAME TIENDA VIRTUAL</h1>
+        {% include "Proyecto_web_app/nav.html" %}
+    </header>
+    <div class="fondo">
+        <section>
+            {% block content%}{% endblock %}
+        </section>
+    </div>
+
+    <footer class="footer bg-dark text-center text-white">
+        <hr>
+        <small>
+            <a href="#">Política de privacidad</a> ·
+            <a href="#">Aviso legal</a> ·
+            <a href="#">Cookies</a>
+        </small>
+        <p class="py-2"><small>(c) UnikGAME 2023</small></p>
+    </footer>
+</body>
+
+</html>
