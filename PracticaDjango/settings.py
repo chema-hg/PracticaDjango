@@ -33,6 +33,7 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     # Nuestras aplicaciones
     'Proyecto_web_app.apps.ProyectoWebAppConfig',
+    'Servicios.apps.ServiciosConfig',
     # Aplicaciones de terceros
     'django_bootstrap5',
     # Aplicaciones por defecto
@@ -126,3 +127,7 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+MEDIA_URL = 'media/'
+
+MEDIA_ROOT = BASE_DIR/'media'
