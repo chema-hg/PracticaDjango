@@ -7,7 +7,7 @@
     </li>
 
     <li class="nav-item px-lg-4">
-        {% url 'Proyecto_web_app:servicios' as servicios_url %}
+        {% url 'Servicios:servicios' as servicios_url %}
         <a class="nav-link text-uppercase fw-bold text-expanded {% if request.path == servicios_url %}
         text-black{% endif %}" href="{{ servicios_url }}">Servicios</a>
     </li>
