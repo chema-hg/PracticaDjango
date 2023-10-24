@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     # Nuestras aplicaciones
     'Proyecto_web_app.apps.ProyectoWebAppConfig',
     'Servicios.apps.ServiciosConfig',
+    'Blog.apps.BlogConfig',
     # Aplicaciones de terceros
     'django_bootstrap5',
     # Aplicaciones por defecto

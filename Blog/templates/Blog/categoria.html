@@ -1,0 +1,22 @@
+<!--Cargamos la plantilla base-->
+{% extends "Proyecto_web_app/base.html" %}
+
+<!-- Establecemos el titulo de la página -->
+{% block title %}Post por Categorias{% endblock %}
+
+{% block content %}
+<div class="container-fluid bg-white" style="margin-bottom: 50px;">
+    <h1 class="text-center">Listado de Post publicados por "{{categoria}}"</h1>
+    {% for post in posts %}
+    <h2>
+        <a href="{% url 'Blog:detalle_post' post.id %}">{{post.titulo}}</a>
+    </h2>
+    <p class="date">Publicado {{ post.autor }} por {{ post.updated }} </p>
+    {{ post.contenido|truncatewords:30|linebreaks }}
+    {% endfor %}
+</div>
+<!-- Contenedor para centrar el botón de regresar a la lista de posts -->
+<div class="d-flex justify-content-center align-items-center">
+    <a href="{% url 'Blog:lista_post' %}" class="btn btn-primary">Regresar</a>
+</div>
+{% endblock %}

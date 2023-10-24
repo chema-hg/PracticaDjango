@@ -4,10 +4,25 @@ h1 {
     padding:0 0 10px 0;
 }
 
-.fondo {
+/* .fondo {
     background-image: url(../img/bg_main.jpg);
     height: 58vh;
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
+} */
+
+.fondo {
+    background-image: url(../img/bg_main.jpg); /* Ruta a tu imagen de fondo */
+    background-size: cover; /* Ajusta la imagen al tamaño del contenedor */
+    background-position: center; /* Centra la imagen horizontalmente */
+    background-repeat: no-repeat; /* Evita la repetición de la imagen */
+    padding: 20px; /* Añade espacio de relleno para que el contenido no esté pegado a los bordes */
+}
+
+p.date { 
+    color:#ccc;
+    font-family: georgia, serif;
+    font-size: 12px;
+    font-style: italic; 
 }

@@ -13,19 +13,19 @@
     </li>
 
     <li class="nav-item px-lg-4">
-        {% url 'Proyecto_web_app:blog' as blog_url %}
-        <a class="nav-link text-uppercase fw-bold text-expanded {% if request.path == blog_url %}
+        {% url 'Blog:lista_post' as blog_url %}
+        <a class="nav-link text-uppercase fw-bold text-expanded {% if request.path|slice:':6' == blog_url %}
         text-black{% endif %}" href="{{ blog_url }}">Blog</a>
     </li>
 
     <li class="nav-item px-lg-4">
-        {% url 'Proyecto_web_app:tienda' as tienda_url %}
+        {% url 'Tienda:tienda' as tienda_url %}
         <a class="nav-link text-uppercase fw-bold text-expanded {% if request.path == tienda_url %}
         text-black{% endif %}" href="{{ tienda_url }}">Tienda</a>
     </li>
 
     <li class="nav-item px-lg-4">
-        {% url 'Proyecto_web_app:contacto' as contacto_url %}
+        {% url 'Contacto:contacto' as contacto_url %}
         <a class="nav-link text-uppercase fw-bold text-expanded {% if request.path == contacto_url %}
         text-black{% endif %}" href="{{ contacto_url }}">Contacto</a>
     </li>
