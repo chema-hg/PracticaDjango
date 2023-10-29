@@ -9,12 +9,16 @@
     <h1 class="text-center">Listado de Post publicados</h1>
     {% for post in posts %}
         <h2>
-            <a href="{% url 'Blog:detalle_post' post.id %}">{{post.titulo}}</a>
+            <a href="{{ post.get_absolute_url }}">{{post.titulo}}</a>
         </h2>
         <p class="date">Publicado {{ post.autor }} por {{ post.updated }} </p>
         {{ post.contenido|truncatewords:30|linebreaks }}
     {% endfor %}   
 </div>
+
+<!-- {% include "Proyecto_web_app/paginacion.html" with page=posts %} -->
+{% include "Proyecto_web_app/paginacion.html" with page=page_obj %}
+
 <section>
     <div style="width: 75%; margin: auto; color: white; text-align: center;">
         Categorías:
@@ -25,4 +29,5 @@
         {% endfor %}
     </div>
 </section> 
+
 {% endblock %}

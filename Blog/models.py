@@ -8,6 +8,10 @@ from django.utils import timezone
 
 # Para importar el timezone y establecer la fecha de creación.
 
+from django.urls import reverse
+
+# Para crear la Url canónica
+
 
 # Create your models here.
 class Categoria(models.Model):
@@ -23,7 +27,7 @@ class Categoria(models.Model):
 
 class Post(models.Model):
     titulo = models.CharField(max_length=250)
-    slug = models.CharField(max_length=250)
+    slug = models.CharField(max_length=250, unique_for_date='created')
     contenido = models.TextField()
     autor = models.ForeignKey(User, on_delete=models.CASCADE, related_name="blog_posts")
     categorias = models.ManyToManyField(Categoria, null=True, blank=True)
@@ -41,3 +45,10 @@ class Post(models.Model):
 
     def __str__(self):
         return self.titulo
+    
+    def get_absolute_url(self):
+        return reverse("Blog:detalle_post", 
+                       args=[self.created.year,
+                             self.created.month,
+                             self.created.day,
+                             self.slug])
