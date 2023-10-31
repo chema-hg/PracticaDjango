@@ -35,6 +35,7 @@ INSTALLED_APPS = [
     'Proyecto_web_app.apps.ProyectoWebAppConfig',
     'Servicios.apps.ServiciosConfig',
     'Blog.apps.BlogConfig',
+    'Contacto.apps.ContactoConfig',
     # Aplicaciones de terceros
     'django_bootstrap5',
     # Aplicaciones por defecto
@@ -132,3 +133,13 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 MEDIA_URL = 'media/'
 
 MEDIA_ROOT = BASE_DIR/'media'
+
+# Configuración de servidor de correo de django
+# Con esta configuración enviará los correos a la consola.
+EMAIL_BACKEND="django.core.mail.backends.console.EmailBackend"
+EMAIL_HOST = 'smtp.outlook.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'usuario@outlook.com'
+EMAIL_HOST_PASSWORD = 'la contraseña del correo'
+EMAIL_DESTINATION = 'El correo donde se mandaran los emails'
+EMAIL_USE_TLS = True
