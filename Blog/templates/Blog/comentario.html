@@ -1,0 +1,14 @@
+{% extends "Proyecto_web_app/base.html" %}
+
+{% block title %}Añade un comentario{% endblock %}
+
+{% block content %}
+    {% if comentario %}
+    <div style="background-color: beige;">
+        <h2>Tu comentario ha sido añadido</h2>
+        <p><a href="{{post.get_absolute_url}}">Vuelve al Post</a></p>
+    </div>
+    {% else %}
+        {% include "Blog/form_comentario.html" %}
+    {% endif %}
+{% endblock%}

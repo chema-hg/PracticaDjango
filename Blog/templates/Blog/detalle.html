@@ -10,10 +10,30 @@
     
     {{ post.contenido|linebreaks }}
 
+    {% with comentarios.count as total_comentarios %}
+        <h2>
+            {{ total_comentarios }} comentario{{ total_comentarios|pluralize }}
+        </h2>
+    {% endwith %}
+
+    {% for comentario in comentarios %}
+        <div class="comment">
+            <p class="info">
+                Comentario {{ forloop.counter }} de {{ comentario.autor }} - 
+                {{ comentario.created }}
+            </p>
+            {{ comentario.cuerpo|linebreaks }}
+        </div>
+    
+    {% empty %}
+        <p>No hay comentarios aún.</p>
+    
+    {% endfor %}
+
     <!-- Contenedor para centrar el botón de regresar a la lista de posts -->
     <div class="d-flex justify-content-center align-items-center">
         <a href="{% url 'Blog:lista_post' %}" class="btn btn-primary">Regresar</a>
     </div>
+    {% include "Blog/form_comentario.html" %}
 </div>
-
 {% endblock %}

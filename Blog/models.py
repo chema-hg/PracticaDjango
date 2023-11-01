@@ -52,3 +52,19 @@ class Post(models.Model):
                              self.created.month,
                              self.created.day,
                              self.slug])
+
+class Comentario(models.Model):
+    post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='comentarios')
+    autor = models.ForeignKey(User, on_delete=models.CASCADE, related_name='post_comentarios')
+    email = models.EmailField()
+    cuerpo = models.TextField(max_length=400)
+    created = models.DateField(auto_now_add=True)
+    updated = models.DateField(auto_now=True)
+    activo = models.BooleanField(default=True)
+
+    class Meta:
+        ordering = ['created']
+        indexes = [models.Index(fields=['created']),]
+    
+    def __str__(self):
+        return f"Comentario de {self.autor} en {self.post}"

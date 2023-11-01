@@ -9,4 +9,5 @@ urlpatterns = [
 path('', views.lista_post.as_view(), name='lista_post'),
 path('<int:year>/<int:month>/<int:day>/<slug:post>/', views.detalle_post, name='detalle_post'),
 path('categoria/<int:categoria_id>/', views.categoria, name='categoria'),
+path('<int:post_id>/comentario/', views.post_comentario, name='post_comentario'),
 ]
