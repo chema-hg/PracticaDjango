@@ -1,19 +1,43 @@
 <!--Cargamos la plantilla base-->
 {% extends "Proyecto_web_app/base.html" %}
 
+<!-- Cargamos la etiqueta personalizada -->
+{% load blog_tags %}
+
 <!-- Establecemos el titulo de la página -->
 {% block title %}Blog{% endblock %}
 
 {% block content %}
+
 <div class="container-fluid bg-white" style="margin-bottom: 50px;">
+
     <h1 class="text-center">Listado de Post publicados</h1>
+    <div id="sidebar">
+        <h2>El Blog</h2>
+        <p>
+            Hay escritos {% posts_totales %} posts hasta el momento.
+        </p>
+        <h3>Últimos Posts</h3>
+        {% mostrar_ultimos_posts 3 %}
+        <h3>Post más comentados</h3>
+        {% obtener_posts_mas_comentados as posts_mas_comentados %}
+        <ul>
+            {% for post in posts_mas_comentados %}
+            <li>
+                <a href="{{ post.get_absolute_url }}">{{ post.titulo }}</a>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+
     {% for post in posts %}
-        <h2>
-            <a href="{{ post.get_absolute_url }}">{{post.titulo}}</a>
-        </h2>
-        <p class="date">Publicado {{ post.autor }} por {{ post.updated }} </p>
-        {{ post.contenido|truncatewords:30|linebreaks }}
-    {% endfor %}   
+    <h2>
+        <a href="{{ post.get_absolute_url }}">{{post.titulo}}</a>
+    </h2>
+    <p class="date">Publicado {{ post.autor }} por {{ post.updated }} </p>
+    <!-- {{ post.contenido|truncatewords:30|linebreaks }} -->
+    {{ post.contenido|markdown|truncatewords_html:15}}
+    {% endfor %}
 </div>
 
 <!-- {% include "Proyecto_web_app/paginacion.html" with page=posts %} -->
@@ -28,6 +52,6 @@
         </a>&nbsp;&nbsp;&nbsp;
         {% endfor %}
     </div>
-</section> 
+</section>
 
 {% endblock %}
