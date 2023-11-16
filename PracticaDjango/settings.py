@@ -38,6 +38,9 @@ INSTALLED_APPS = [
     'Contacto.apps.ContactoConfig',
     # Aplicaciones de terceros
     'django_bootstrap5',
+    # Mapa del Sitio
+    'django.contrib.sites', # add sites to installed_apps
+    'django.contrib.sitemaps',  # add Django sitemaps to installed app
     # Aplicaciones por defecto
     'django.contrib.admin',
     'django.contrib.auth',
@@ -46,6 +49,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 ]
+
+SITE_ID = 1  # define the site id
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
