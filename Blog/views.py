@@ -7,8 +7,12 @@ from .models import Post, Categoria, Comentario
 from django.views.generic import ListView
 
 # Importamos el formulario para los comentarios de cada post.
-from .forms import ComentarioForm
+from .forms import ComentarioForm, BusquedaForm
 from django.views.decorators.http import require_POST
+
+# Para realizar busquedas en los campos de los post.
+from django.contrib.postgres.search import SearchVector, SearchQuery, SearchRank
+
 
 # Create your views here.
 
@@ -93,4 +97,33 @@ def post_comentario(request, post_id):
         request,
         "Blog/comentario.html",
         {"post": post, "form": form, "comentario": comentario},
+    )
+
+
+def busqueda_post(request):
+    formulario = BusquedaForm()
+    consulta = None
+    resultados = []
+
+    if "consulta" in request.GET:
+        formulario = BusquedaForm(request.GET)
+        if formulario.is_valid():
+            consulta = formulario.cleaned_data["consulta"]
+            vector_busqueda = SearchVector(
+                "titulo", weight="A", config="spanish"
+            ) + SearchVector("contenido", weight="B", config="spanish")
+            consulta_busqueda = SearchQuery(consulta, config="spanish")
+            resultados = (
+                Post.objects.annotate(
+                    search=vector_busqueda,
+                    rank=SearchRank(vector_busqueda, consulta_busqueda),
+                )
+                .filter(rank__gte=0.3)
+                .order_by("-rank")
+            )
+
+    return render(
+        request,
+        "Blog/busqueda.html",
+        {"formulario": formulario, "consulta": consulta, "resultados": resultados},
     )

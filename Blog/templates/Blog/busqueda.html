@@ -1,0 +1,44 @@
+<!--Cargamos la plantilla base-->
+{% extends "Proyecto_web_app/base.html" %}
+
+<!-- Cargamos la etiqueta personalizada -->
+{% load blog_tags %}
+
+<!-- Establecemos el titulo de la página -->
+{% block title %}Busqueda{% endblock %}
+
+{% block content %}
+
+<div class="container-fluid bg-white" style="margin-bottom: 50px;">
+
+{% if consulta %}
+    <h1>Post que contienen la consulta "{{ consulta|truncatewords:15 }}"</h1>
+    <h3>
+    {% with resultados.count as total_results %}
+        Encontrados {{ total_results }} resultado{{total_results|pluralize}}
+    {% endwith %}
+    </h3>
+    {% for post in resultados %}
+    <h4>
+        <a href="{{ post.get_absolute_url }}">
+            {{ post.titulo }}
+        </a>
+    </h4>
+    {{ post.contenido|markdown|truncatewords_html:12 }}
+    {% empty %}
+    <p>No hay resultados para la consulta.</p>
+    {% endfor %}
+
+    <p><a href="{% url 'Blog:busqueda_post' %}">Realizar nueva búsqueda</a></p>
+
+{% else %}
+    <h1>Busqueda en los Posts</h1>
+    <form method="get">
+        {{ formulario.as_p }}
+        <input type="submit" value="Busqueda">
+    </form>
+{% endif %}
+
+</div>
+
+{% endblock %}

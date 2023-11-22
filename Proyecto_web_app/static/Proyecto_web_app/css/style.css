@@ -29,6 +29,7 @@ h2 {
     background-position: center; /* Centra la imagen horizontalmente */
     background-repeat: no-repeat; /* Evita la repetición de la imagen */
     padding: 20px; /* Añade espacio de relleno para que el contenido no esté pegado a los bordes */
+    min-height: 390px;
 }
 
 p.date { 
