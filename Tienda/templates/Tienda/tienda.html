@@ -1,0 +1,116 @@
+<!--Cargamos la plantilla base-->
+{% extends "Proyecto_web_app/base.html" %}
+
+<!-- Establecemos el titulo de la página -->
+{% block title %}Tienda{% endblock %}
+
+<!-- Definimos su contenido -->
+{% block content %}
+<h1 class="text-center">Elige tu Consola.</h1>
+
+<div class="container">
+  <div class="bg-dark">
+    <ul class="nav nav-tabs">
+      <li class="nav-item">
+        <a class="nav-link active" id="ps4-tab" data-bs-toggle="tab" href="#ps4" role="tab" aria-controls="ps4"
+          aria-selected="true">PS4</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" id="ps5-tab" data-bs-toggle="tab" href="#ps5" role="tab" aria-controls="ps5"
+          aria-selected="false">PS5</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" id="xbox-tab" data-bs-toggle="tab" href="#xbox" role="tab" aria-controls="xbox"
+          aria-selected="false">Xbox</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" id="xbox-tab" data-bs-toggle="tab" href="#nintendo" role="tab" aria-controls="xbox"
+          aria-selected="false">Nintendo</a>
+      </li>
+    </ul>
+  </div>
+
+  <div class="tab-content">
+    <div class="tab-pane fade show active" id="ps4" role="tabpanel" aria-labelledby="ps4-tab">
+      <h3>Juegos PS4</h3>
+      <div class="row g-4">
+        {% for producto in productos %}
+        {% if producto.categoria_id == 1 %}
+        <div class="col-md-3">
+          <div class="card h-100" style="width:200px">
+            <img class="card-img-top" src="{{producto.imagen.url}}" alt="Card image">
+            <div class="card-body">
+              <h4 class="card-title">{{producto.nombre}}</h4>
+              <p class="card-text">{{producto.precio}} €</p>
+              <a href="#" class="btn btn-primary">See Profile</a>
+            </div>
+          </div>
+        </div>
+        {% endif %}
+        {% endfor %}
+      </div>
+    </div>
+
+    <div class="tab-pane fade" id="ps5" role="tabpanel" aria-labelledby="ps5-tab">
+      <h3>Juegos PS5</h3>
+      <!-- Contenido para juegos PS5 -->
+      <div class="row g-4">
+        {% for producto in productos %}
+          {% if producto.categoria_id == 2 %}
+            <div class="col-md-3">
+              <div class="card h-100" style="width:200px">
+                <img class="card-img-top" src="{{producto.imagen.url}}" alt="Card image">
+                <div class="card-body">
+                  <h4 class="card-title">{{producto.nombre}}</h4>
+                  <p class="card-text">{{producto.precio}} €</p>
+                  <a href="#" class="btn btn-primary">See Profile</a>
+                </div>
+              </div>
+            </div>
+          {% endif %}
+        {% endfor %}
+      </div>
+    </div>
+    <div class="tab-pane fade" id="xbox" role="tabpanel" aria-labelledby="xbox-tab">
+      <h3>Juegos Xbox</h3>
+      <!-- Contenido para juegos Xbox -->
+      <div class="row g-4">
+        {% for producto in productos %}
+        {% if producto.categoria_id == 3 %}
+        <div class="col-md-3">
+          <div class="card h-100" style="width:200px">
+            <img class="card-img-top" src="{{producto.imagen.url}}" alt="Card image">
+            <div class="card-body">
+              <h4 class="card-title">{{producto.nombre}}</h4>
+              <p class="card-text">{{producto.precio}} €</p>
+              <a href="#" class="btn btn-primary">See Profile</a>
+            </div>
+          </div>
+        </div>
+        {% endif %}
+        {% endfor %}
+      </div>
+    </div>
+    <div class="tab-pane fade" id="nintendo" role="tabpanel" aria-labelledby="xbox-tab">
+      <h3>Juegos Nintendo</h3>
+      <!-- Contenido para juegos Nintendo -->
+      <div class="row g-4">
+        {% for producto in productos %}
+        {% if producto.categoria_id == 4 %}
+        <div class="col-md-3">
+          <div class="card h-100" style="width:200px">
+            <img class="card-img-top" src="{{producto.imagen.url}}" alt="Card image">
+            <div class="card-body">
+              <h4 class="card-title">{{producto.nombre}}</h4>
+              <p class="card-text">{{producto.precio}} €</p>
+              <a href="#" class="btn btn-primary">See Profile</a>
+            </div>
+          </div>
+        </div>
+        {% endif %}
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

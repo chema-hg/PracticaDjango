@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'Servicios.apps.ServiciosConfig',
     'Blog.apps.BlogConfig',
     'Contacto.apps.ContactoConfig',
+    'Tienda.apps.TiendaConfig',
     # Aplicaciones de terceros
     'django_bootstrap5',
     # Mapa del Sitio
