@@ -30,7 +30,16 @@
     </ul>
   </div>
 
+
   <div class="tab-content">
+
+    <!--colocamos el carrito en un float en la parte derecha -->
+    <div style="float:right">
+      <p></p>
+      <div>CESTA</div>
+      {% include "carro/widget.html" %}
+    </div>
+
     <div class="tab-pane fade show active" id="ps4" role="tabpanel" aria-labelledby="ps4-tab">
       <h3>Juegos PS4</h3>
       <div class="row g-4">
@@ -42,7 +51,9 @@
             <div class="card-body">
               <h4 class="card-title">{{producto.nombre}}</h4>
               <p class="card-text">{{producto.precio}} €</p>
-              <a href="#" class="btn btn-primary">See Profile</a>
+            </div>
+            <div class="card-footer text-center">
+              <a href="{% url 'carro:agregar' producto.id %}" class="btn btn-success">Agregar al Carro</a>
             </div>
           </div>
         </div>
@@ -56,18 +67,18 @@
       <!-- Contenido para juegos PS5 -->
       <div class="row g-4">
         {% for producto in productos %}
-          {% if producto.categoria_id == 2 %}
-            <div class="col-md-3">
-              <div class="card h-100" style="width:200px">
-                <img class="card-img-top" src="{{producto.imagen.url}}" alt="Card image">
-                <div class="card-body">
-                  <h4 class="card-title">{{producto.nombre}}</h4>
-                  <p class="card-text">{{producto.precio}} €</p>
-                  <a href="#" class="btn btn-primary">See Profile</a>
-                </div>
-              </div>
+        {% if producto.categoria_id == 2 %}
+        <div class="col-md-3">
+          <div class="card h-100" style="width:200px">
+            <img class="card-img-top" src="{{producto.imagen.url}}" alt="Card image">
+            <div class="card-body">
+              <h4 class="card-title">{{producto.nombre}}</h4>
+              <p class="card-text">{{producto.precio}} €</p>
+              <a href="#" class="btn btn-primary">See Profile</a>
             </div>
-          {% endif %}
+          </div>
+        </div>
+        {% endif %}
         {% endfor %}
       </div>
     </div>

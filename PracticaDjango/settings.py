@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'Blog.apps.BlogConfig',
     'Contacto.apps.ContactoConfig',
     'Tienda.apps.TiendaConfig',
+    'Carro.apps.CarroConfig',
     # Aplicaciones de terceros
     'django_bootstrap5',
     # Mapa del Sitio
@@ -82,6 +83,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                 # para que la variable global este disponible para todo el proyecto
+                'Carro.context_processor.importe_total_carro',
             ],
         },
     },
