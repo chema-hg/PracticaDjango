@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'Contacto.apps.ContactoConfig',
     'Tienda.apps.TiendaConfig',
     'Carro.apps.CarroConfig',
+    'Autentificacion.apps.AutentificacionConfig',
     # Aplicaciones de terceros
     'django_bootstrap5',
     # Mapa del Sitio
@@ -162,3 +163,8 @@ EMAIL_HOST_USER = 'usuario@outlook.com'
 EMAIL_HOST_PASSWORD = 'la contraseña del correo'
 EMAIL_DESTINATION = 'El correo donde se mandaran los emails'
 EMAIL_USE_TLS = True
+
+# Redirección URL
+LOGIN_REDIRECT_URL = 'Proyecto_web_app:home'
+LOGIN_URL = 'login'
+LOGOUT_URL = 'logout'

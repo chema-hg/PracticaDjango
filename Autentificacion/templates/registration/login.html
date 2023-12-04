@@ -1,0 +1,34 @@
+{% extends "Proyecto_web_app/base.html" %}
+
+{% load django_bootstrap5 %}
+
+{% block title %}Log-in{% endblock %}
+
+{% block content %}
+
+<h1>Log-in</h1>
+{% if form.errors %}
+<p>
+    Tu nombre de usuario y/o contraseña no coinciden.
+    Por favor, inténtalo de nuevo.
+</p>
+{% else %}
+<p>Por favor, use el siguiente formulario para log-in:</p>
+{% endif %}
+<div class="login-form">
+    <form action="{% url 'login' %}" method="post">
+        {% csrf_token %}
+        <div class="container w-25 bg-primary rounded-1">
+            {% bootstrap_form form %}
+            <input type="hidden" name="next" value="{{ next }}" />
+            <p><input type="submit" value="Log-in"></p>
+            <!-- {{ form.as_p }} -->
+    </form>
+    <p>
+        <a href="{% url 'password_reset' %}" style="color:white">
+            ¿Olvidaste tu contraseña?
+        </a>
+    </p>
+</div>
+
+{% endblock %}

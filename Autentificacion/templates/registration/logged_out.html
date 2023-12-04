@@ -1,0 +1,13 @@
+{% extends "Proyecto_web_app/base.html" %}
+
+{% block title %}Logged out{% endblock %}
+
+{% block content %}
+
+<h1>Logged out</h1>
+<p>
+    ¡Has cerrado la sesión correctamente!
+    Puedes <a href="{% url 'login' %}">logearte de nuevo</a>.
+</p>
+
+{% endblock %}

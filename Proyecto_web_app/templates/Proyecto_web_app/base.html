@@ -26,9 +26,18 @@
 <body>
     <header>
         <h1 class="container-fluid text-center text-white bg-dark py-5">UnikGAME TIENDA VIRTUAL</h1>
+        <div style="color: black; text-align: right; margin-right: 100px;">
+            {% if user.is_authenticated %}
+            Hola, {{user.username}}&nbsp;&nbsp;|&nbsp;&nbsp;
+            <a href="{% url 'logout' %}">Cerrar Sesión</a>
+            {% else %}
+            <a href="{% url 'login' %}">Login</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a
+                href="{% url 'registrar' %}">Registrarse</a>
+            {% endif %}
+        </div>
         {% include "Proyecto_web_app/nav.html" %}
     </header>
-    
+
     <div class="fondo">
         <section>
             {% block content%}{% endblock %}
