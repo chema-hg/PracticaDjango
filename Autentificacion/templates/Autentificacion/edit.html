@@ -1,0 +1,15 @@
+{% extends "Proyecto_web_app/base.html" %}
+
+{% block title %}Edita tu Cuenta{% endblock %}
+
+{% block content %}
+<h1>Edita tu cuenta.</h1>
+<p>Puedes editar tu cuenta usando el siguiente formulario:</p>
+<form method="post" enctype="multipart/form-data">
+    {{ user_form.as_p }}
+    {{ profile_form.as_p }}
+    {% csrf_token %}
+    <p><input type="submit" value="Guardar Cambios"></p>
+</form>
+
+{% endblock %}

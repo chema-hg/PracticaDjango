@@ -168,3 +168,8 @@ EMAIL_USE_TLS = True
 LOGIN_REDIRECT_URL = 'Proyecto_web_app:home'
 LOGIN_URL = 'login'
 LOGOUT_URL = 'logout'
+
+AUTHENTICATION_BACKENDS = [
+'django.contrib.auth.backends.ModelBackend',
+'Autentificacion.autentificacion.EmailAuthBackend',
+]
