@@ -30,5 +30,18 @@
         </a>
     </p>
 </div>
-
+<div class="social">
+    <ul>
+        <li class="facebook">
+            <a href="{% url 'social:begin' 'facebook' %}">
+                Haz Login con Facebook
+            </a>
+        </li>
+        <li class="twitter">
+            <a href="{% url 'social:begin' 'twitter' %}">
+                Haz Login con Twitter
+            </a>
+        </li>
+    </ul>
+</div>
 {% endblock %}

@@ -69,24 +69,62 @@ def dashboard(request):
     return render(request, "Autentificacion/dashboard.html")
 
 
+# @login_required
+# def edit(request):
+#     if request.method == "POST":
+#         user_form = UserEditForm(instance=request.user, data=request.POST)
+#         profile_form = ProfileEditForm(
+#             instance=request.user.profile, data=request.POST, files=request.FILES
+#         )
+#         if user_form.is_valid() and profile_form.is_valid():
+#             user_form.save()
+#             profile_form.save()
+#             messages.success(request, 'Actualización del Perfil realizada correctamente.')
+#         else:
+#             messages.error(request, 'Error actualizando tu Perfil.')
+#     else:
+#         user_form = UserEditForm(instance=request.user)
+#         profile_form = ProfileEditForm(instance=request.user.profile)
+#     return render(
+#         request,
+#         "Autentificacion/edit.html",
+#         {"user_form": user_form, "profile_form": profile_form},
+#     )
+
 @login_required
 def edit(request):
     if request.method == "POST":
         user_form = UserEditForm(instance=request.user, data=request.POST)
-        profile_form = ProfileEditForm(
-            instance=request.user.profile, data=request.POST, files=request.FILES
-        )
+        if profile:
+            profile_form = ProfileEditForm(
+                instance=profile, data=request.POST, files=request.FILES
+            )
+        else:
+            # Si el perfil no existe, crea uno nuevo
+            profile_form = ProfileEditForm(
+                data=request.POST, files=request.FILES
+            )
+            
         if user_form.is_valid() and profile_form.is_valid():
             user_form.save()
-            profile_form.save()
+            if profile:
+                profile_form.save()
+            else:
+                new_profile = profile_form.save(commit=False)
+                new_profile.user = request.user
+                new_profile.save()
             messages.success(request, 'Actualización del Perfil realizada correctamente.')
         else:
             messages.error(request, 'Error actualizando tu Perfil.')
     else:
         user_form = UserEditForm(instance=request.user)
-        profile_form = ProfileEditForm(instance=request.user.profile)
+        if profile:
+            profile_form = ProfileEditForm(instance=profile)
+        else:
+            profile_form = ProfileEditForm()
     return render(
         request,
         "Autentificacion/edit.html",
         {"user_form": user_form, "profile_form": profile_form},
     )
+

@@ -38,5 +38,6 @@ urlpatterns = [
     path('tienda/', include('Tienda.urls')),
     path('carro/', include('Carro.urls')),
     path('cuenta/', include('Autentificacion.urls')),
+    path('social-auth/', include('social_django.urls', namespace='social')),
 ]
 urlpatterns+=static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

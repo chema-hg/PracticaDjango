@@ -29,7 +29,7 @@ SECRET_KEY = 'django-insecure-zgotfg5-uo986w8fkx+*n__8x+#ku-q1#_xftm6*z3ywmg(bw6
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['unikgame.com','localhost','127.0.0.1']
 
 
 # Application definition
@@ -45,6 +45,8 @@ INSTALLED_APPS = [
     'Autentificacion.apps.AutentificacionConfig',
     # Aplicaciones de terceros
     'django_bootstrap5',
+    'social_django',
+    'django_extensions',
     # Mapa del Sitio
     'django.contrib.sites', # add sites to installed_apps
     'django.contrib.sitemaps',  # add Django sitemaps to installed app
@@ -172,4 +174,12 @@ LOGOUT_URL = 'logout'
 AUTHENTICATION_BACKENDS = [
 'django.contrib.auth.backends.ModelBackend',
 'Autentificacion.autentificacion.EmailAuthBackend',
+'social_core.backends.facebook.FacebookOAuth2',
+'social_core.backends.twitter.TwitterOAuth',
 ]
+
+SOCIAL_AUTH_FACEBOOK_KEY = env('SOCIAL_AUTH_FACEBOOK_KEY') # Facebook App ID
+SOCIAL_AUTH_FACEBOOK_SECRET = env('SOCIAL_AUTH_FACEBOOK_SECRET') # Facebook App Secret
+
+SOCIAL_AUTH_TWITTER_KEY = env('SOCIAL_AUTH_TWITTER_KEY') # Twitter API Key
+SOCIAL_AUTH_TWITTER_SECRET = env('SOCIAL_AUTH_TWITTER_SECRET') # Twitter API Secret
