@@ -34,12 +34,17 @@
     <ul>
         <li class="facebook">
             <a href="{% url 'social:begin' 'facebook' %}">
-                Haz Login con Facebook
+                Login con Facebook
             </a>
         </li>
         <li class="twitter">
             <a href="{% url 'social:begin' 'twitter' %}">
-                Haz Login con Twitter
+                Login con Twitter
+            </a>
+        </li>
+        <li class="google">
+            <a href="{% url 'social:begin' 'google-oauth2' %}">
+                login con Google
             </a>
         </li>
     </ul>
