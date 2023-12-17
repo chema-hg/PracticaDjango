@@ -93,6 +93,11 @@ def dashboard(request):
 
 @login_required
 def edit(request):
+    try:
+        profile = request.user.profile
+    except Profile.DoesNotExist:
+        profile = None
+        
     if request.method == "POST":
         user_form = UserEditForm(instance=request.user, data=request.POST)
         if profile:
