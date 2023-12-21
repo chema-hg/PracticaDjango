@@ -1,5 +1,6 @@
 <!--Cargamos la plantilla base-->
 {% extends "Proyecto_web_app/base.html" %}
+{% load thumbnail %}
 
 <!-- Establecemos el titulo de la página -->
 {% block title %}Tienda{% endblock %}
@@ -47,7 +48,8 @@
         {% if producto.categoria_id == 1 %}
         <div class="col-md-3">
           <div class="card h-100" style="width:200px">
-            <img class="card-img-top" src="{{producto.imagen.url}}" alt="Card image">
+            <!-- <img class="card-img-top" src="{{producto.imagen.url}}" alt="Card image"> -->
+            <img class="card-img-top" src="{% thumbnail producto.imagen 200x0 %}" alt="Card image">
             <div class="card-body">
               <h4 class="card-title">{{producto.nombre}}</h4>
               <p class="card-text">{{producto.precio}} €</p>

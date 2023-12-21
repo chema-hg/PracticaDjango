@@ -30,7 +30,7 @@ class Post(models.Model):
     slug = models.CharField(max_length=250, unique_for_date='created')
     contenido = models.TextField()
     autor = models.ForeignKey(User, on_delete=models.CASCADE, related_name="blog_posts")
-    categorias = models.ManyToManyField(Categoria, null=True, blank=True)
+    categorias = models.ManyToManyField(Categoria, blank=True, related_name="categoria_post")
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
 

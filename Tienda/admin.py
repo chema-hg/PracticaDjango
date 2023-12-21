@@ -4,12 +4,18 @@ from .models import *
 
 # Register your models here.
 
+
 class CategoriaProductoAdmin(admin.ModelAdmin):
-    readonly_fields=('created', 'updated')
+    list_display = ["nombre", "slug"]
+    prepopulated_fields = {"slug": ("nombre",)}
+
 
 class ProductoAdmin(admin.ModelAdmin):
-    readonly_fields=('created', 'updated')
+    list_display = ["nombre", "slug", "precio", "stock", "created", "updated"]
+    list_filter = ["stock", "created", "updated"]
+    list_editable = ["precio", "stock"]
+    prepopulated_fields = {"slug": ("nombre",)}
 
 # Registramos ambas tablas y clases
 admin.site.register(CategoriaProducto, CategoriaProductoAdmin)
-admin.site.register(Producto, ProductoAdmin) 
+admin.site.register(Producto, ProductoAdmin)

@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'django_bootstrap5',
     'social_django',
     'django_extensions',
+    'easy_thumbnails',
     # Mapa del Sitio
     'django.contrib.sites', # add sites to installed_apps
     'django.contrib.sitemaps',  # add Django sitemaps to installed app
