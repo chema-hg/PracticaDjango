@@ -1,0 +1,79 @@
+<!--Cargamos la plantilla base-->
+{% extends "Proyecto_web_app/base.html" %}
+{% load thumbnail %}
+
+<!-- Establecemos el titulo de la página -->
+{% block title %}Carro{% endblock %}
+
+<!-- Definimos su contenido -->
+{% block content %}
+<div class="container">
+    <div class="bg-white text-black">
+        {% with total_items=carro|length %}
+        {% if total_items > 0 %}
+        <h1>Tu Carro de la Compra</h1>
+        <p class="ms-3">
+            <a href="{% url 'carro:limpiar' %}" style="color: #0fa4b8; text-decoration: none;" class="link">
+                Anular la selección de todos los artículos</a>
+        </p>
+        <hr>
+    </div>
+    <table class="table table-dark table-striped">
+        <thead>
+            <tr>
+                <th>Imagen</th>
+                <th>Producto</th>
+                <th>Cantidad</th>
+                <th>Eliminar</th>
+                <th>Precio Unitario</th>
+                <th>total</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in carro %}
+            {% with producto=item.producto %}
+            <tr>
+                <td>
+                    <img src="{% thumbnail producto.imagen 100x0 %}">
+                </td>
+                <td>{{ producto.nombre }}</td>
+                <td>{{ item.cantidad }}</td>
+                <td>
+                    <a href="{% url 'carro:eliminar' producto.id %}" class="btn btn-danger">Eliminar</a>
+                    <a href="{% url 'carro:restar' producto.id %}" class="btn btn-primary">Restar 1 ud</a>
+
+                </td>
+                <td class="num">{{ item.precio }} €</td>
+                <td class="num">{{item.precio_total}}</td>
+            </tr>
+            {% endwith %}
+            {% endfor %}
+            <tr class="total">
+                <td>Total</td>
+                <td colspan="4"></td>
+                <td class="num">{{ carro.get_total_price }} €</td>
+            </tr>
+        </tbody>
+    </table>
+    <div class="d-flex justify-content-end">
+        <p class="text-right">
+            <a href="{% url 'Tienda:tienda' %}" class="btn btn-primary">Continua comprando</a>
+            <a href="{% url 'orders:order_create' %}" class="btn btn-success ml-2">Checkout</a>
+        </p>
+    </div>
+    
+    
+    {% else %}
+    <div class="container py-4">
+        <div class="bg-white text-black">
+            <h3 class="ms-3 pt-3">Tu cesta de UnikGAME está vacía.</h3>
+            <p class="ms-3 pb-3">Revisa tus productos guardados para más tarde o
+                <a href="{% url 'Tienda:tienda' %}">continúa comprando.</a>
+            </p>
+        </div>
+    </div>
+    {% endif %}
+    {% endwith %}
+
+</div>
+{% endblock %}

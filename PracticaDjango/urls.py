@@ -39,6 +39,7 @@ urlpatterns = [
     path('carro/', include('Carro.urls')),
     path('cuenta/', include('Autentificacion.urls')),
     path('social-auth/', include('social_django.urls', namespace='social')),
+    path('orders/', include('Orders.urls', namespace='orders')),
 ]
 
 if settings.DEBUG:

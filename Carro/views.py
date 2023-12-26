@@ -1,9 +1,5 @@
 from django.shortcuts import render
 
-# Create your views here.
-
-from django.shortcuts import render
-
 # Importamos la clase Carro
 from .carro import Carro
 
@@ -14,9 +10,12 @@ from Tienda.models import Producto
 # pagina de la tienda por lo que tendremos que importar el redirect
 from django.shortcuts import redirect
 
+from django.contrib.auth.decorators import login_required
+
 # Create your views here.
 
 # vista para agregar un producto al carro
+@login_required
 def agregar_producto(request, producto_id):
     carro = Carro(request)
     producto = Producto.objects.get(id=producto_id)
@@ -59,5 +58,5 @@ def mostrar_carro(request):
         "productos": productos,
         "carro": carro
     }
-    return render(request, "Tienda/carro.html", contexto)
+    return render(request, "Tienda/carro_detalle.html", contexto)
 

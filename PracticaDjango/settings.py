@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'Tienda.apps.TiendaConfig',
     'Carro.apps.CarroConfig',
     'Autentificacion.apps.AutentificacionConfig',
+    'Orders.apps.OrdersConfig',
     # Aplicaciones de terceros
     'django_bootstrap5',
     'social_django',
@@ -88,7 +89,7 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                  # para que la variable global este disponible para todo el proyecto
-                'Carro.context_processor.importe_total_carro',
+                'Carro.context_processor.carro',
             ],
         },
     },
@@ -202,3 +203,4 @@ SOCIAL_AUTH_PIPELINE = [
 'social_core.pipeline.user.user_details',
 ]
 
+CART_SESSION_ID = 'carro'
