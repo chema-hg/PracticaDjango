@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'social_django',
     'django_extensions',
     'easy_thumbnails',
+    'debug_toolbar',
     # Mapa del Sitio
     'django.contrib.sites', # add sites to installed_apps
     'django.contrib.sitemaps',  # add Django sitemaps to installed app
@@ -66,6 +67,7 @@ INSTALLED_APPS = [
 SITE_ID = 1  # define the site id
 
 MIDDLEWARE = [
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -204,3 +206,8 @@ SOCIAL_AUTH_PIPELINE = [
 ]
 
 CART_SESSION_ID = 'carro'
+
+# Django debug toolbar
+INTERNAL_IPS = [
+'127.0.0.1',
+]

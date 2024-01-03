@@ -2,6 +2,8 @@ from django.shortcuts import render
 from .models import OrderItem
 from .forms import OrderCreateForm
 from Carro.carro import Carro
+# Crea una tarea asincronica al finalizar la orden
+from .tasks import order_created
 
 
 # Create your views here.
@@ -20,6 +22,8 @@ def order_create(request):
                 )
             # Limpia el carro
             carro.clear()
+            # launch asynchronous task
+            order_created.delay(order.id)
             return render(request, "Orders/order/created.html", {"order": order})
     else:
         form = OrderCreateForm()
