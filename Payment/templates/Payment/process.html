@@ -1,0 +1,61 @@
+<!--Cargamos la plantilla base-->
+{% extends "Proyecto_web_app/base.html" %}
+{% load thumbnail %}
+{% load static %}
+
+<!-- Establecemos el titulo de la página -->
+{% block title %}Pagar el Pedido{% endblock %}
+
+<!-- Definimos su contenido -->
+{% block content %}
+<div class="container">
+    <h1>Resumen del Pedido</h1>
+    <table class="table table-dark table-striped">
+        <thead>
+            <tr>
+                <th>Imagen</th>
+                <th>Producto</th>
+                <th>Precio</th>
+                <th>Cantidad</th>
+                <th>Total</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in order.items.all %}
+            <tr>
+                <td>
+                    <!-- <img src="{% thumbnail item.product.imagen 100x0 %}"> -->
+                    {% if item.product.imagen %}
+                    <!-- Si hay una imagen, mostrarla con la etiqueta thumbnail -->
+                    <img src="{% thumbnail item.product.imagen 100x0 %}">
+                    {% else %}
+                    <!-- Si no hay una imagen, mostrar una imagen predeterminada -->
+                    <img src="{% static '/Proyecto_web_app/img/no_image.png' %}">
+                    {% endif %}
+
+                </td>
+                <td>{{ item.product.nombre }}</td>
+                <td class="num">{{ item.price }}€</td>
+                <td class="num">{{ item.quantity }}</td>
+                <td class="num">{{ item.get_cost }}€</td>
+            </tr>
+            {% endfor %}
+
+            <tr>
+                <td>Total</td>
+                <td colspan="3"></td>
+                <td class="num">{{ order.get_total_cost }} €</td>
+            </tr>
+        </tbody>
+    </table>
+    <div class="d-flex justify-content-end">
+        <p class="text-right">
+        <form action="{% url 'payment:process' %}" method="post">
+            <input type="submit" value="Pagar">
+            {% csrf_token %}
+        </form>
+        </p>
+    </div>
+
+</div>
+{% endblock %}

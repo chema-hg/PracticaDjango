@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     'django_extensions',
     'easy_thumbnails',
     'debug_toolbar',
+    'Payment.apps.PaymentConfig',
     # Mapa del Sitio
     'django.contrib.sites', # add sites to installed_apps
     'django.contrib.sitemaps',  # add Django sitemaps to installed app
@@ -211,3 +212,10 @@ CART_SESSION_ID = 'carro'
 INTERNAL_IPS = [
 '127.0.0.1',
 ]
+
+# Stripe settings
+STRIPE_PUBLISHABLE_KEY = env('STRIPE_PUBLISHABLE_KEY') # Publishable key
+STRIPE_SECRET_KEY = env('STRIPE_SECRET_KEY') # Secret key
+STRIPE_API_VERSION = '2023-10-16'
+
+STRIPE_WEBHOOK_SECRET = env('STRIPE_WEBHOOK_SECRET') # Secret key'
