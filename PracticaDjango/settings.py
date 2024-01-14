@@ -151,6 +151,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = 'static/'
+STATIC_ROOT = BASE_DIR/'static'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
@@ -219,3 +220,5 @@ STRIPE_SECRET_KEY = env('STRIPE_SECRET_KEY') # Secret key
 STRIPE_API_VERSION = '2023-10-16'
 
 STRIPE_WEBHOOK_SECRET = env('STRIPE_WEBHOOK_SECRET') # Secret key'
+
+
