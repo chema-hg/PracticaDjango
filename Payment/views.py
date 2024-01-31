@@ -38,6 +38,12 @@ def payment_process(request):
                 },
                 'quantity': item.quantity,
             })
+        # Stripe coupon
+        if order.cupon:
+            stripe_coupon = stripe.Coupon.create(
+                name=order.cupon.codigo, percent_off=order.descuento, duration='once')
+            session_data['discounts'] = [{'coupon': stripe_coupon.id}]
+
         # create Stripe checkout session
         session = stripe.checkout.Session.create(**session_data)
         # redirect to Stripe payment form
@@ -45,7 +51,10 @@ def payment_process(request):
     else:
         return render(request, 'Payment/process.html', locals())
 
+
 def payment_completed(request):
     return render(request, 'Payment/completed.html')
+
+
 def payment_canceled(request):
     return render(request, 'Payment/canceled.html')

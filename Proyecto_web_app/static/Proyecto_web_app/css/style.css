@@ -162,4 +162,22 @@ label {
     margin-right: 4px; /* Agregar un margen a la derecha para separar el texto del campo */
 }
 
+/* codigo css para disimular un boton como si fuera un enlace ya que tenemos que
+enlazar a una url pero utilizando el método post a traves de un formulario
+ya que si no nos da un error */
+#logout-form {
+    display: inline;
+    margin: 0;
+    padding: 0;
+    border: none;
+    background: none;
+}
 
+#logout-form button {
+    padding: 0;
+    border: none;
+    background: none;
+    color: blue; /* Color del enlace */
+    text-decoration: underline; /* Subrayado para indicar que es un enlace */
+    cursor: pointer; /* Cambiar el cursor al pasar por encima */
+}

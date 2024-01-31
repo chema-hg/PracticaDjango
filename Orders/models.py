@@ -2,6 +2,10 @@ from django.db import models
 from Tienda.models import Producto
 from django.conf import settings
 
+from decimal import Decimal
+from django.core.validators import MinValueValidator, MaxValueValidator
+from Cupones.models import Cupon
+
 # Create your models here.
 
 
@@ -17,6 +21,11 @@ class Order(models.Model):
     paid = models.BooleanField(default=False)
     stripe_id = models.CharField(max_length=250, blank=True)
 
+    cupon = models.ForeignKey(
+        Cupon, related_name='orders', null=True, blank=True, on_delete=models.SET_NULL)
+    descuento = models.IntegerField(
+        default=0, validators=[MinValueValidator(0), MaxValueValidator(100)])
+    
     class Meta:
         ordering = ["-created"]
         indexes = [
@@ -25,9 +34,18 @@ class Order(models.Model):
 
     def __str__(self):
         return f"Orden {self.id}"
+    
+    def coste_total_antes_del_descuento(self):
+        return sum(item.get_cost() for item in self.items.all())
+
+    def aplicar_descuento(self):
+        coste_total = self.coste_total_antes_del_descuento()
+        if self.descuento:
+            return coste_total * (self.descuento / Decimal(100)) 
 
     def get_total_cost(self):
-        return sum(item.get_cost() for item in self.items.all())
+        coste_total = self.coste_total_antes_del_descuento()
+        return coste_total - self.aplicar_descuento()        
 
     def get_stripe_url(self):
         if not self.stripe_id:
@@ -42,9 +60,9 @@ class Order(models.Model):
         return f'https://dashboard.stripe.com{path}payments/{self.stripe_id}'
 
 
-
 class OrderItem(models.Model):
-    order = models.ForeignKey(Order, related_name="items", on_delete=models.CASCADE)
+    order = models.ForeignKey(
+        Order, related_name="items", on_delete=models.CASCADE)
     product = models.ForeignKey(
         Producto, related_name="order_items", on_delete=models.CASCADE
     )

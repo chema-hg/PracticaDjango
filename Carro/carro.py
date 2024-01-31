@@ -1,6 +1,8 @@
 from django.conf import settings
 from decimal import Decimal
 from Tienda.models import Producto
+# Para aplicar el cupón
+from Cupones.models import Cupon
 
 
 class Carro:
@@ -18,6 +20,8 @@ class Carro:
             # con los productos que el usuario va a comprar
             # la clave es el id del producto y el valor son las características del producto
         self.carro = carro
+        # guardamos el cupon a aplicar en la sesión
+        self.cupon_id = self.session.get('cupon_id')
 
     def agregar(self, producto, cantidad=1, override_cantidad=False):
         # Si el producto no esta en el carro
@@ -101,3 +105,20 @@ class Carro:
         """
         del self.session[settings.CART_SESSION_ID]
         self.guardar_carro()
+
+    @property
+    def cupon(self):
+        if self.cupon_id:
+            try:
+                return Cupon.objects.get(id=self.cupon_id)
+            except Cupon.DoesNotExist:
+                pass
+        return None
+
+    def conseguir_descuento(self):
+        if self.cupon:
+            return (self.cupon.descuento / Decimal(100)) * self.get_total_price()
+        return Decimal(0)
+
+    def precio_total_despues_de_descuento(self):
+        return self.get_total_price() - self.conseguir_descuento()

@@ -44,25 +44,64 @@
 
                 </td>
                 <td class="num">{{ item.precio }} €</td>
-                <td class="num">{{item.precio_total}}</td>
+                <td class="num">{{item.precio_total}} €</td>
             </tr>
             {% endwith %}
             {% endfor %}
-            <tr class="total">
+            <!-- <tr class="total">
                 <td>Total</td>
                 <td colspan="4"></td>
                 <td class="num">{{ carro.get_total_price }} €</td>
+            </tr> -->
+            {% if carro.cupon %}
+            <tr class="subtotal">
+                <td>Subtotal</td>
+                <td colspan="4"></td>
+                <td class="num">{{ carro.get_total_price|floatformat:2 }} €</td>
+            </tr>
+            <tr>
+                <td>
+                    "{{ carro.cupon.codigo }}" cupón
+                    ({{ carro.cupon.descuento}}% descuento)
+                </td>
+                <td colspan="4"></td>
+                <td class="num neg">
+                    - {{ carro.conseguir_descuento|floatformat:2 }} €
+                </td>
+            </tr>
+            {% endif %}
+            <tr class="Total">
+                <td>Total</td>
+                <td colspan="4"></td>
+                <td class="num">
+                    {{ carro.precio_total_despues_de_descuento|floatformat:2 }} €
+                </td>
             </tr>
         </tbody>
     </table>
-    <div class="d-flex justify-content-end">
-        <p class="text-right">
-            <a href="{% url 'Tienda:tienda' %}" class="btn btn-primary">Continua comprando</a>
-            <a href="{% url 'orders:order_create' %}" class="btn btn-success ml-2">Checkout</a>
-        </p>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <p>¿Tienes un cupón?:</p>
+                <form action="{% url 'cupones:aplicar' %}" method="post">
+                    {{ formulario_cupon }}
+                    <input type="submit" value="Aplicar" class="btn btn-primary">
+                    {% csrf_token %}
+                </form>
+            </div>
+            <div class="col-md-6">
+                <div class="d-flex justify-content-end">
+                    <p class="text-right">
+                        <a href="{% url 'Tienda:tienda' %}" class="btn btn-primary">Continua comprando</a>
+                        <a href="{% url 'orders:order_create' %}" class="btn btn-success ml-2">Checkout</a>
+                    </p>
+                </div>
+            </div>
+        </div>
     </div>
     
-    
+
+
     {% else %}
     <div class="container py-4">
         <div class="bg-white text-black">

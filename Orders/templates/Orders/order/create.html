@@ -50,7 +50,7 @@
             </div>
         </div>
         <div class="col-md-7">
-            <div class="order-info">
+            <div class="order-info" style="width: 80%;">
                 <h3>Your order</h3>
                 <ul>
                     {% for item in cart %}
@@ -59,8 +59,15 @@
                         <span>{{ item.precio_total }} €</span>
                     </li>
                     {% endfor %}
+                    {% if carro.cupon %}
+                    <li>
+                        "{{ carro.cupon.codigo }}" ({{ carro.cupon.descuento }}% descuento)
+                        <span class="neg">- {{ carro.conseguir_descuento|floatformat:2 }} €</span>
+                    </li>
+                    {% endif %}
                 </ul>
-                <p>Total: {{ cart.get_total_price }} €</p>
+                <!-- <p>Total: {{ cart.get_total_price }} €</p> -->
+                <p>Total: {{ carro.precio_total_despues_de_descuento|floatformat:2 }} €</p>
             </div>
         </div>
     </div>

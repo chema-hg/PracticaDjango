@@ -12,6 +12,9 @@ from django.shortcuts import redirect
 
 from django.contrib.auth.decorators import login_required
 
+# para aplicar un descuento
+from Cupones.forms import CuponFormulario
+
 # Create your views here.
 
 # vista para agregar un producto al carro
@@ -54,9 +57,11 @@ def limpiar_carro(request):
 def mostrar_carro(request):
     productos = Producto.objects.all()
     carro = Carro(request)
+    formulario_cupon = CuponFormulario()
     contexto = {
         "productos": productos,
-        "carro": carro
+        "carro": carro,
+        "formulario_cupon": formulario_cupon,
     }
     return render(request, "Tienda/carro_detalle.html", contexto)
 

@@ -36,12 +36,13 @@ urlpatterns = [
     path('contacto/', include('Contacto.urls')),
     path('sitemap.xml', sitemap, {'sitemaps': sitemaps}, name='django.contrib.sitemaps.views.sitemap'),
     path('payment/', include('Payment.urls', namespace='payment')),
+    path('cupones/', include('Cupones.urls', namespace='cupones')),
     path('tienda/', include('Tienda.urls')),
     path('carro/', include('Carro.urls')),
     path('cuenta/', include('Autentificacion.urls')),
     path('social-auth/', include('social_django.urls', namespace='social')),
     path('orders/', include('Orders.urls', namespace='orders')),
-    path('__debug__/', include('debug_toolbar.urls')),
+    path('__debug__/', include('debug_toolbar.urls')),    
 ]
 
 if settings.DEBUG:

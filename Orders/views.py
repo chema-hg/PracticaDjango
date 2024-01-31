@@ -37,7 +37,11 @@ def order_create(request):
     if request.method == "POST":
         form = OrderCreateForm(request.POST)
         if form.is_valid():
-            order = form.save()
+            order = form.save(commit=False)
+            if carro.cupon:
+                order.cupon = carro.cupon
+                order.descuento = carro.cupon.descuento
+                order.save()
             for item in carro:
                 OrderItem.objects.create(
                     order=order,
