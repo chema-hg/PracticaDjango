@@ -15,6 +15,9 @@ from django.contrib.auth.decorators import login_required
 # para aplicar un descuento
 from Cupones.forms import CuponFormulario
 
+# Para aplicar el recomendador de productos
+from Tienda.recomendar import Recomendar
+
 # Create your views here.
 
 # vista para agregar un producto al carro
@@ -58,10 +61,18 @@ def mostrar_carro(request):
     productos = Producto.objects.all()
     carro = Carro(request)
     formulario_cupon = CuponFormulario()
+    # para aplicar el recomendador de productos
+    r = Recomendar()
+    productos_carro = [item['producto'] for item in carro]
+    if(productos_carro):
+        productos_recomendados = r.sugerir_productos(productos_carro, max_resultados=4)
+    else:
+        productos_recomendados = []
     contexto = {
         "productos": productos,
         "carro": carro,
         "formulario_cupon": formulario_cupon,
+        "productos_recomendados": productos_recomendados,
     }
     return render(request, "Tienda/carro_detalle.html", contexto)
 

@@ -10,7 +10,7 @@ def tienda(request):
     # carga en la variable productos todos los juegos que hayamos introducido a través
     # del panel de administración de Django.
     contexto = {
-        "productos": productos
+        "productos": productos,
     }
     
     return render(request, "Tienda/tienda.html", contexto)   

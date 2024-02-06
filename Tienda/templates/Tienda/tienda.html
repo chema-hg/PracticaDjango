@@ -63,19 +63,21 @@
       </div>
     </div>
 
-    <div class="tab-pane fade" id="ps5" role="tabpanel" aria-labelledby="ps5-tab">
+    <div class="tab-pane fade show" id="ps5" role="tabpanel" aria-labelledby="ps5-tab">
       <h3>Juegos PS5</h3>
-      <!-- Contenido para juegos PS5 -->
       <div class="row g-4">
         {% for producto in productos %}
         {% if producto.categoria_id == 2 %}
         <div class="col-md-3">
           <div class="card h-100" style="width:200px">
-            <img class="card-img-top" src="{{producto.imagen.url}}" alt="Card image">
+            <!-- <img class="card-img-top" src="{{producto.imagen.url}}" alt="Card image"> -->
+            <img class="card-img-top" src="{% thumbnail producto.imagen 200x0 %}" alt="Card image">
             <div class="card-body">
               <h4 class="card-title">{{producto.nombre}}</h4>
               <p class="card-text">{{producto.precio}} €</p>
-              <a href="#" class="btn btn-primary">See Profile</a>
+            </div>
+            <div class="card-footer text-center">
+              <a href="{% url 'carro:agregar' producto.id %}" class="btn btn-success">Agregar al Carro</a>
             </div>
           </div>
         </div>
@@ -83,6 +85,9 @@
         {% endfor %}
       </div>
     </div>
+
+    
+
     <div class="tab-pane fade" id="xbox" role="tabpanel" aria-labelledby="xbox-tab">
       <h3>Juegos Xbox</h3>
       <!-- Contenido para juegos Xbox -->
@@ -91,11 +96,14 @@
         {% if producto.categoria_id == 3 %}
         <div class="col-md-3">
           <div class="card h-100" style="width:200px">
-            <img class="card-img-top" src="{{producto.imagen.url}}" alt="Card image">
+            <!-- <img class="card-img-top" src="{{producto.imagen.url}}" alt="Card image"> -->
+            <img class="card-img-top" src="{% thumbnail producto.imagen 200x0 %}" alt="Card image">
             <div class="card-body">
               <h4 class="card-title">{{producto.nombre}}</h4>
               <p class="card-text">{{producto.precio}} €</p>
-              <a href="#" class="btn btn-primary">See Profile</a>
+            </div>
+            <div class="card-footer text-center">
+              <a href="{% url 'carro:agregar' producto.id %}" class="btn btn-success">Agregar al Carro</a>
             </div>
           </div>
         </div>
@@ -103,6 +111,7 @@
         {% endfor %}
       </div>
     </div>
+
     <div class="tab-pane fade" id="nintendo" role="tabpanel" aria-labelledby="xbox-tab">
       <h3>Juegos Nintendo</h3>
       <!-- Contenido para juegos Nintendo -->
@@ -111,11 +120,13 @@
         {% if producto.categoria_id == 4 %}
         <div class="col-md-3">
           <div class="card h-100" style="width:200px">
-            <img class="card-img-top" src="{{producto.imagen.url}}" alt="Card image">
+            <img class="card-img-top" src="{% thumbnail producto.imagen 200x0 %}" alt="Card image">
             <div class="card-body">
               <h4 class="card-title">{{producto.nombre}}</h4>
               <p class="card-text">{{producto.precio}} €</p>
-              <a href="#" class="btn btn-primary">See Profile</a>
+            </div>
+            <div class="card-footer text-center">
+              <a href="{% url 'carro:agregar' producto.id %}" class="btn btn-success">Agregar al Carro</a>
             </div>
           </div>
         </div>

@@ -222,4 +222,7 @@ STRIPE_API_VERSION = '2023-10-16'
 
 STRIPE_WEBHOOK_SECRET = env('STRIPE_WEBHOOK_SECRET') # Secret key'
 
-
+# Configuración para Redis
+REDIS_HOST = 'localhost'
+REDIS_PORT = 6379
+REDIS_DB = 1
